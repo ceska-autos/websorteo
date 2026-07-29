@@ -21,15 +21,53 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Cupo de participantes (placeholder editable a mano)
-  var cupoTotal = 1000;
-  var cupoActual = 0; // Actualizar este número a medida que se venden chances
-  var cupoFill = document.getElementById("cupoFill");
-  var cupoLabel = document.getElementById("cupoLabel");
+  // Galería / carrusel
+  var track = document.getElementById("carouselTrack");
+  var dotsWrap = document.getElementById("carouselDots");
+  var prevBtn = document.querySelector(".carousel-prev");
+  var nextBtn = document.querySelector(".carousel-next");
 
-  if (cupoFill && cupoLabel) {
-    var pct = Math.min(100, Math.round((cupoActual / cupoTotal) * 100));
-    cupoFill.style.width = pct + "%";
-    cupoLabel.textContent = cupoActual + " / " + cupoTotal;
+  if (track && dotsWrap) {
+    var slides = Array.prototype.slice.call(track.children);
+
+    slides.forEach(function (slide, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "carousel-dot" + (i === 0 ? " is-active" : "");
+      dot.setAttribute("aria-label", "Ir a la foto " + (i + 1));
+      dot.addEventListener("click", function () {
+        slide.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      });
+      dotsWrap.appendChild(dot);
+    });
+
+    var dots = Array.prototype.slice.call(dotsWrap.children);
+
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var idx = slides.indexOf(entry.target);
+              dots.forEach(function (d) { d.classList.remove("is-active"); });
+              if (dots[idx]) dots[idx].classList.add("is-active");
+            }
+          });
+        },
+        { root: track, threshold: 0.6 }
+      );
+      slides.forEach(function (slide) { observer.observe(slide); });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        track.scrollBy({ left: -track.clientWidth * 0.8, behavior: "smooth" });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        track.scrollBy({ left: track.clientWidth * 0.8, behavior: "smooth" });
+      });
+    }
   }
 });
