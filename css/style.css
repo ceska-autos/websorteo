@@ -686,98 +686,138 @@ a {
   margin: 0;
 }
 
-/* ---------- Packs ---------- */
+/* ---------- Chances (packs) ---------- */
 
-.packs-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-@media (min-width: 700px) {
-  .packs-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.pack-card {
+.chances-list {
   display: flex;
   flex-direction: column;
-  background: var(--black);
-  color: var(--white);
-  border-radius: var(--radius);
-  padding: 22px 16px;
-  text-decoration: none;
-  border: 2px solid var(--black);
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  gap: 30px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.chance-card {
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  background: linear-gradient(160deg, #1a1a1d, #0a0a0b);
+  border: 2px solid var(--red-bright);
+  border-radius: 20px;
+  padding: 26px 24px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(255, 42, 31, 0.4), inset 0 0 24px rgba(255, 42, 31, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.pack-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--red);
-  box-shadow: 0 14px 30px rgba(225, 6, 0, 0.35);
+.chance-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 32px rgba(255, 42, 31, 0.6), inset 0 0 24px rgba(255, 42, 31, 0.08);
 }
 
-.pack-card.is-popular {
-  border-color: var(--red);
+.chance-card.is-popular {
+  border-color: var(--red-bright);
+  box-shadow: 0 0 30px rgba(255, 42, 31, 0.55), inset 0 0 24px rgba(255, 42, 31, 0.08);
 }
 
-.pack-tag {
+.chance-card.is-selected {
+  border-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15), 0 0 30px rgba(255, 42, 31, 0.6);
+}
+
+.chance-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
   background: linear-gradient(135deg, var(--red-bright), var(--red-dark));
   color: var(--white);
-  font-size: 10px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  padding: 4px 8px;
-  border-radius: 999px;
-}
-
-.pack-qty {
-  font-size: 30px;
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 2px;
-}
-
-.pack-qty-label {
   font-size: 11px;
-  color: var(--gray-300);
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 18px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(255, 42, 31, 0.6);
+  white-space: nowrap;
 }
 
-.pack-price {
+.chance-info {
+  width: 100%;
+}
+
+.chance-title {
+  color: var(--white);
   font-size: 22px;
   font-weight: 800;
-  color: var(--red-bright);
-  margin-bottom: 16px;
+  margin: 0 0 4px;
 }
 
-.pack-cta {
-  margin-top: auto;
+.chance-subtitle {
+  color: #ffce54;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.chance-buy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.chance-price {
+  color: var(--red-bright);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.chance-btn,
+.chance-select {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: var(--white);
-  color: var(--black);
-  border-radius: 999px;
-  padding: 10px 14px;
-  font-weight: 700;
-  font-size: 13px;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.pack-card:hover .pack-cta {
+  gap: 8px;
   background: linear-gradient(135deg, var(--red-bright), var(--red-dark));
   color: var(--white);
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 6px 16px rgba(255, 42, 31, 0.4);
+  white-space: nowrap;
+}
+
+.chance-card.is-selected .chance-select {
+  background: var(--white);
+  color: var(--black);
+}
+
+.chances-tagline {
+  text-align: center;
+  color: var(--gray-600);
+  font-size: 15px;
+  margin: 28px 0 0;
+}
+
+@media (min-width: 560px) {
+  .chance-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .chance-info {
+    width: auto;
+  }
+
+  .chance-buy {
+    width: auto;
+  }
 }
 
 /* ---------- Cupo / fecha ---------- */
@@ -1254,50 +1294,10 @@ body {
   margin: 0 0 16px;
 }
 
-.pack-select-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-@media (min-width: 500px) {
-  .pack-select-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 .pack-option {
-  border: 2px solid var(--gray-300);
-  border-radius: 12px;
-  background: var(--white);
-  padding: 14px 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-
-.pack-option strong {
-  display: block;
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.pack-option span {
-  display: block;
-  font-size: 12px;
-  color: var(--gray-600);
-  margin-top: 4px;
-}
-
-.pack-option.is-selected {
-  border-color: var(--red);
-  background: #fff5f5;
-  box-shadow: 0 6px 18px rgba(225, 6, 0, 0.2);
-}
-
-.pack-option.is-selected span {
-  color: var(--red);
-  font-weight: 700;
+  font: inherit;
+  text-align: left;
+  width: 100%;
 }
 
 .order-summary-row {
