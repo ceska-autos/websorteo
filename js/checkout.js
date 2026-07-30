@@ -18,7 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
     currentPrice = price;
 
     packs.forEach(function (btn) {
-      btn.classList.toggle("is-selected", Number(btn.dataset.qty) === Number(qty));
+      var isSelected = Number(btn.dataset.qty) === Number(qty);
+      btn.classList.toggle("is-selected", isSelected);
+      var label = btn.querySelector(".chance-select");
+      if (label) label.textContent = isSelected ? "Elegido ✓" : "Elegir";
     });
 
     summaryQty.textContent = qty + " chances";
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var message =
       "Hola! Quiero confirmar mi compra de " + qty +
-      " chances para el sorteo de la Suzuki LTR 450. Adjunto el comprobante.";
+      " chances para el sorteo del Suzuki LTR 450. Adjunto el comprobante.";
     whatsappBtn.href = "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
   }
 
