@@ -479,6 +479,73 @@ a {
   letter-spacing: 0.4px;
 }
 
+/* ---------- Bonus ebooks ---------- */
+
+.bonus-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 760px) {
+  .bonus-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.bonus-card {
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bonus-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+}
+
+.bonus-media {
+  aspect-ratio: 3 / 4;
+}
+
+.bonus-body {
+  padding: 20px;
+}
+
+.bonus-title {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.bonus-desc {
+  font-size: 13.5px;
+  color: var(--gray-600);
+  margin: 0;
+}
+
+.bonus-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.bonus-price-old {
+  text-decoration: line-through;
+  color: var(--gray-600);
+  font-size: 13px;
+}
+
+.bonus-price-new {
+  color: var(--red);
+  font-weight: 800;
+  font-size: 16px;
+}
+
 /* ---------- Prizes ---------- */
 
 .prizes-grid {
