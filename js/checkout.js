@@ -51,6 +51,13 @@ document.addEventListener("DOMContentLoaded", function () {
     match ? match.dataset.price : packs[0].dataset.price
   );
 
+  // Meta Pixel: registrar conversión al enviar el comprobante por WhatsApp
+  if (whatsappBtn && typeof fbq === "function") {
+    whatsappBtn.addEventListener("click", function () {
+      fbq("track", "Contact");
+    });
+  }
+
   // Copiar datos de transferencia
   copyButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
