@@ -36,6 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
   packs.forEach(function (btn) {
     btn.addEventListener("click", function () {
       selectPack(btn.dataset.qty, btn.dataset.price);
+
+      if (typeof fbq === "function") {
+        fbq("track", "AddToCart", {
+          content_name: btn.dataset.qty + " chances",
+          value: Number(btn.dataset.price),
+          currency: "ARS"
+        });
+      }
     });
   });
 
@@ -51,10 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
     match ? match.dataset.price : packs[0].dataset.price
   );
 
-  // Meta Pixel: registrar conversión al enviar el comprobante por WhatsApp
+  // Meta Pixel: InitiateCheckout al tocar el botón final de WhatsApp
+  // (Purchase queda reservado para cuando el pago se confirma manualmente)
   if (whatsappBtn && typeof fbq === "function") {
     whatsappBtn.addEventListener("click", function () {
-      fbq("track", "Contact");
+      fbq("track", "InitiateCheckout", {
+        content_name: currentQty + " chances",
+        value: Number(currentPrice),
+        currency: "ARS"
+      });
     });
   }
 
