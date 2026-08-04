@@ -70,4 +70,17 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
+
+  // Meta Pixel: AddToCart al elegir un pack desde la landing
+  if (typeof fbq === "function") {
+    document.querySelectorAll(".chance-card[data-qty]").forEach(function (card) {
+      card.addEventListener("click", function () {
+        fbq("track", "AddToCart", {
+          content_name: card.dataset.qty + " chances",
+          value: Number(card.dataset.price),
+          currency: "ARS"
+        });
+      });
+    });
+  }
 });
